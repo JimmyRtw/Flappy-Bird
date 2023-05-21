@@ -4,6 +4,13 @@
 using namespace std;
 using namespace sf;
 
+#include "sky.h"
+#include "ground.h"
+#include "pipe.h"
+
+#ifndef GAME_H
+#define GAME_H
+
 class game
 {
     private:
@@ -11,20 +18,25 @@ class game
     RenderWindow* window;
     Event* event;
 
+    sky sky_obj;
+    ground ground_obj;
+    pipe pipe_obj;
+
     public:
 
     game();
 
     void init_window();
     void init_game();
-    void update_game(Event*);
+    void quit_game(Event*);
+    void play_game(Event*);
     void game_loop();
+    void draw_objects();
     void update_window();
     void close_window();
 };
    
-
-
+#endif
 
 
 
