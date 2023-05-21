@@ -20,12 +20,13 @@ class pipe
 
     public:
 
-    pipe();
+    pipe(bool up);
     
     void set_image(bool);
     void init_sprite();
-    void init_texture(bool);
-    void set_origin(bool);
+    void init_texture();
+    void set_origin();
+    void set_pipe_orientation(bool)
     void set_position(float,float);
     void draw_sprite(RenderWindow*);
 };

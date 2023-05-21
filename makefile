@@ -1,10 +1,10 @@
 all: compile link
 
 compile:
-	g++ -c main.cpp game.cpp sky.cpp ground.cpp pipe.cpp -I"E:\SFML-2.5.1-windows-gcc-7.3.0-mingw-64-bit\SFML-2.5.1\include" -DSFML_STATIC
+	g++ -c main.cpp game.cpp sky.cpp ground.cpp pipe.cpp pipe_manager.cpp -I"E:\SFML-2.5.1-windows-gcc-7.3.0-mingw-64-bit\SFML-2.5.1\include" -DSFML_STATIC
 
 link:
-	g++ main.o game.o sky.o ground.o pipe.o -o main -L"E:\SFML-2.5.1-windows-gcc-7.3.0-mingw-64-bit\SFML-2.5.1\lib" -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lopengl32 -lfreetype -lwinmm -lgdi32 -mwindows -lsfml-main
+	g++ main.o game.o sky.o ground.o pipe.o pipe_manager.o -o main -L"E:\SFML-2.5.1-windows-gcc-7.3.0-mingw-64-bit\SFML-2.5.1\lib" -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lopengl32 -lfreetype -lwinmm -lgdi32 -mwindows -lsfml-main
 
 clean:
 	rm -f main *.o
