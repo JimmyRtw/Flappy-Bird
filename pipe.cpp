@@ -61,7 +61,7 @@ void pipe :: move_pipe(float speed)
 
 void pipe :: reset_pipe_position(Sprite* side_img,Sprite* top_img,int hor_dist,int ver_dist)
 {
-    int range = 100 + (rand() % (int)(600 - 100 + 1));
+    int range = 150 + (rand() % (int)(590 - 150 + 1));
 
     float x = pipe_sprite->getTexture()->getSize().x * pipe_sprite->getScale().x; 
 

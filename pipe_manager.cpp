@@ -61,8 +61,8 @@ void pipe_manager :: draw_pipes(RenderWindow* window)
 
 void pipe_manager :: init_pipes_position()
 {
-    float x = 1920/3;
-    float y =  100 + (rand() % (int)(600 - 100 + 1));
+    float x = 1920/1.1;
+    float y = 150 + (rand() % (int)(590 - 150 + 1));
 
     for(int i=0;i<this->n;i++)
     {
@@ -73,7 +73,7 @@ void pipe_manager :: init_pipes_position()
         down_pipe->set_position(x,y);
 
         x += hor_dist;
-        y =  100 + (rand() % (int)(600 - 100 + 1));
+        y = 150 + (rand() % (int)(590 - 150 + 1));
     }
 }
 
@@ -106,9 +106,9 @@ void pipe_manager :: pipe_reset_position()
     pipe* up_pipe = up_pipes[first_index];
     pipe* down_pipe = down_pipes[first_index];
 
-    up_pipe->reset_pipe_position(up_pipes[last_index]->return_pipe_sprite(),down_pipes[first_index]->return_pipe_sprite(),hor_dist,ver_dist);
     down_pipe->reset_pipe_position(down_pipes[last_index]->return_pipe_sprite(),nullptr,hor_dist,ver_dist);
-
+    up_pipe->reset_pipe_position(up_pipes[last_index]->return_pipe_sprite(),down_pipe->return_pipe_sprite(),hor_dist,ver_dist);
+    
     last_index = first_index;
     first_index = (first_index+1)%n;
 }

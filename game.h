@@ -22,6 +22,8 @@ class game
     ground ground_obj;
     pipe_manager pipe_manager_obj;
 
+    bool game_on = false;
+
     public:
 
     game();
@@ -33,6 +35,7 @@ class game
     void game_loop();
     void draw_objects();
     void update_window();
+    void update_game(bool);
     void close_window();
 };
    
