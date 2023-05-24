@@ -20,13 +20,17 @@ class pipe_manager
 
     int ver_dist;
     int hor_dist;
-    int speed;
+    float speed = 0.2;
+
+    int first_index;
+    int last_index;
 
     public:
 
     pipe_manager();
 
     void set_tnop(int);
+    void set_indexes();
     void set_speed(int);
     void set_ver_dist(int);
     void set_hor_dist(int);

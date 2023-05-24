@@ -14,7 +14,7 @@ void game::play_game(Event* event)
 void game::init_window()
 {
     this->window = new RenderWindow(VideoMode(1920,1080), "FLAPPY~BIRD",Style::Fullscreen);
-    this->window->setFramerateLimit(60); 
+    this->window->setFramerateLimit(120); 
 }
 
 void game::init_game()
@@ -50,6 +50,8 @@ void game::close_window()
 void game::update_window()
 {
     window->display();
+    pipe_manager_obj.move_pipes();
+    pipe_manager_obj.pipe_reset_position();
     window->clear();
 }
 
