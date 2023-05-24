@@ -59,18 +59,20 @@ void pipe :: move_pipe(float speed)
     pipe_sprite->setPosition(pipe_sprite->getPosition().x - speed, pipe_sprite->getPosition().y);
 }
 
-void pipe :: reset_pipe_position(Sprite* img,int hor_dist)
+void pipe :: reset_pipe_position(Sprite* side_img,Sprite* top_img,int hor_dist,int ver_dist)
 {
+    int range = 100 + (rand() % (int)(600 - 100 + 1));
+
     float x = pipe_sprite->getTexture()->getSize().x * pipe_sprite->getScale().x; 
 
     float position = this->pipe_sprite->getPosition().x + x/2;
 
-    float img_pos_x = img->getPosition().x;
-    float img_pos_y = img->getPosition().y;
+    float side_img_pos_x = side_img->getPosition().x;
+    float side_img_pos_y = top_img==NULL? range : top_img->getPosition().y+ver_dist;
 
     if(position<0)
     {
-        this->pipe_sprite->setPosition(img_pos_x+hor_dist,img_pos_y);
+        this->pipe_sprite->setPosition(side_img_pos_x+hor_dist,side_img_pos_y);
     }
 }
 
@@ -78,3 +80,4 @@ Sprite* pipe :: return_pipe_sprite()
 {
     return this->pipe_sprite;
 }
+

@@ -29,7 +29,7 @@ class pipe
     void set_pipe_orientation(bool);
     void set_position(float,float);
     void move_pipe(float);
-    void reset_pipe_position(Sprite*,int);
+    void reset_pipe_position(Sprite*,Sprite*,int,int);
     void draw_sprite(RenderWindow*);
 
 
