@@ -39,9 +39,9 @@ void pipe::set_origin()
     float x = pipe_sprite->getTexture()->getSize().x * pipe_sprite->getScale().x;
     float y = pipe_sprite->getTexture()->getSize().y * pipe_sprite->getScale().y;
 
-    y = pipe_up==true?y:0;
+    y = pipe_up==true?0:y;
 
-    pipe_sprite->setOrigin(x / 2, y/2);
+    pipe_sprite->setOrigin(x / 2, y);
 }
 
 void pipe::set_position(float x, float y)
@@ -51,6 +51,6 @@ void pipe::set_position(float x, float y)
 
 void pipe::draw_sprite(RenderWindow* window)
 {
-    window->draw(*pipe_sprite);
+    window->draw(*this->pipe_sprite);
 }
 

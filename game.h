@@ -6,7 +6,7 @@ using namespace sf;
 
 #include "sky.h"
 #include "ground.h"
-#include "pipe.h"
+#include "pipe_manager.h"
 
 #ifndef GAME_H
 #define GAME_H
@@ -20,7 +20,7 @@ class game
 
     sky sky_obj;
     ground ground_obj;
-    pipe pipe_obj;
+    pipe_manager pipe_manager_obj;
 
     public:
 

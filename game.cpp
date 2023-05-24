@@ -68,6 +68,6 @@ void game::game_loop()
 void game::draw_objects()
 {
     sky_obj.draw_sprite(this->window);
-    pipe_obj.draw_sprite(this->window);
+    pipe_manager_obj.draw_pipes(this->window);
     ground_obj.draw_sprite(this->window);
 }

@@ -16,7 +16,7 @@ class pipe
 
     bool pipe_up = false;
 
-    string path = "C:\\Users\\admin\\Desktop\\GAME PROJECTS\\Flappy Bird\\images\\";
+    string path = "C:\\GAME PROJECTS\\Flappy-Bird\\images\\";
 
     public:
 
@@ -26,7 +26,7 @@ class pipe
     void init_sprite();
     void init_texture();
     void set_origin();
-    void set_pipe_orientation(bool)
+    void set_pipe_orientation(bool);
     void set_position(float,float);
     void draw_sprite(RenderWindow*);
 };

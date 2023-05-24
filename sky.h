@@ -14,7 +14,7 @@ class sky
     Texture *sky_texture;
     Sprite *sky_sprite;
 
-    string path = "C:\\Users\\admin\\Desktop\\GAME PROJECTS\\Flappy Bird\\images\\";
+    string path = "C:\\GAME PROJECTS\\Flappy-Bird\\images\\";
 
     public:
 
