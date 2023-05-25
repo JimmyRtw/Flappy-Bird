@@ -31,14 +31,14 @@ class pipe_manager
 
     void set_tnop(int);
     void set_indexes();
-    void set_speed(int);
+    void set_speed(float);
     void set_ver_dist(int);
     void set_hor_dist(int);
     void init_pipes();
     void draw_pipes(RenderWindow* window);
     void init_pipes_position();
     void init_pipes_origin();
-    void move_pipes();
+    void move_pipes(float);
     void pipe_reset_position();
 };
    

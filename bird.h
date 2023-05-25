@@ -4,33 +4,38 @@
 using namespace std;
 using namespace sf;
 
-#ifndef GROUND_H
-#define GROUND_H
+#ifndef BIRD_H
+#define BIRD_H
 
-class ground
+class bird
 {
     private:
 
-    Texture *ground_texture;
-    Sprite *ground_sprite;
+    Texture *bird_texture_1,*bird_texture_2,*bird_texture_3;
+    Sprite *bird_sprite;
 
-    int speed;
+    float vertical_speed = 0;
+    float flap = -10;
+    float gravity = 0.5;
+
+    bool alive = true;
 
     string path = "C:\\GAME PROJECTS\\Flappy-Bird\\images\\";
 
     public:
 
-    ground();
+    bird();
     
     void set_image();
-    void set_speed(float);
+    void set_vertical_speed(float);
     void init_sprite();
     void init_texture();
     void set_origin();
-    void move_ground(float);
     void set_position(float,float);
-    void reset_ground_position();
+    void set_bird_life();
     void draw_sprite(RenderWindow*);
+
+    bool update_bird(Event*);
 };
    
 

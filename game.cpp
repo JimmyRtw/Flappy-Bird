@@ -13,7 +13,7 @@ void game::play_game(Event *event)
 void game::init_window()
 {
     this->window = new RenderWindow(VideoMode(1920, 1080), "FLAPPY~BIRD", Style::Fullscreen);
-    this->window->setFramerateLimit(120);
+    this->window->setFramerateLimit(60);
 }
 
 void game::init_game()
@@ -68,16 +68,17 @@ void game::game_loop()
         play_game(this->event);
     }
 
-    draw_objects();
     update_window();
+    draw_objects();
 }
 
 void game::update_game(bool game_on)
 {
     if(game_on)
     {
-        pipe_manager_obj.move_pipes();
-        pipe_manager_obj.pipe_reset_position();
+        this->game_on = bird_obj.update_bird(this->event);
+        ground_obj.move_ground(object_speed);
+        pipe_manager_obj.move_pipes(object_speed);
     }
 }
 
@@ -86,4 +87,6 @@ void game::draw_objects()
     sky_obj.draw_sprite(this->window);
     pipe_manager_obj.draw_pipes(this->window);
     ground_obj.draw_sprite(this->window);
+    start_screen_obj.draw_sprite(this->window,this->game_on);
+    bird_obj.draw_sprite(this->window);
 }

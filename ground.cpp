@@ -13,7 +13,12 @@ void ground::set_image()
     init_texture();
     init_sprite();
     set_origin();
-    set_position(1920/2,1300);
+    set_position(0,1080);
+}
+
+void ground::set_speed(float speed)
+{
+    this->speed = speed;
 }
 
 void ground::init_texture()
@@ -31,7 +36,7 @@ void ground::set_origin()
     float x = ground_sprite->getTexture()->getSize().x * ground_sprite->getScale().x;
     float y = ground_sprite->getTexture()->getSize().y * ground_sprite->getScale().y;
 
-    ground_sprite->setOrigin(x / 2, y);
+    ground_sprite->setOrigin(0, y);
 }
 
 void ground::set_position(float x, float y)
@@ -44,3 +49,25 @@ void ground::draw_sprite(RenderWindow* window)
     window->draw(*ground_sprite);
 }
 
+void ground::move_ground(float speed)
+{
+    set_speed(speed);
+
+    float pos_x = ground_sprite->getPosition().x;
+    float pos_y = ground_sprite->getPosition().y;
+
+    ground_sprite->setPosition(pos_x-this->speed,pos_y);
+    
+    reset_ground_position();
+}
+
+void ground::reset_ground_position()
+{
+    float pos_x = ground_sprite->getPosition().x;
+    float pos_y = ground_sprite->getPosition().y;
+
+    if(pos_x<=-1920)
+    {
+        set_position(0,1080);
+    }
+}

@@ -4,15 +4,15 @@
 using namespace std;
 using namespace sf;
 
-#ifndef GROUND_H
-#define GROUND_H
+#ifndef START_SCREEN_H
+#define START_SCREEN_H
 
-class ground
+class start_screen
 {
     private:
 
-    Texture *ground_texture;
-    Sprite *ground_sprite;
+    Texture *start_screen_texture;
+    Sprite *start_screen_sprite;
 
     int speed;
 
@@ -20,17 +20,14 @@ class ground
 
     public:
 
-    ground();
+    start_screen();
     
     void set_image();
-    void set_speed(float);
     void init_sprite();
     void init_texture();
     void set_origin();
-    void move_ground(float);
     void set_position(float,float);
-    void reset_ground_position();
-    void draw_sprite(RenderWindow*);
+    void draw_sprite(RenderWindow*,bool);
 };
    
 

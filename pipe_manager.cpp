@@ -4,7 +4,6 @@ pipe_manager :: pipe_manager()
 {
     set_tnop(9);
     set_indexes();
-    set_speed(2.5);
     set_ver_dist(200);
     set_hor_dist(350);
     init_pipes();
@@ -23,7 +22,7 @@ void pipe_manager :: set_indexes()
     this->last_index = n-1;
 }
 
-void pipe_manager :: set_speed(int speed)
+void pipe_manager :: set_speed(float speed)
 {
     this->speed = speed;
 }
@@ -89,8 +88,10 @@ void pipe_manager :: init_pipes_origin()
     }
 }
 
-void pipe_manager :: move_pipes()
+void pipe_manager :: move_pipes(float speed)
 {
+    set_speed(speed);
+
     for(int i=0;i<this->n;i++)
     {
         pipe* up_pipe = up_pipes[i];
@@ -99,6 +100,8 @@ void pipe_manager :: move_pipes()
         up_pipe->move_pipe(this->speed);
         down_pipe->move_pipe(this->speed);   
     }
+
+    pipe_reset_position();
 }
 
 void pipe_manager :: pipe_reset_position()
