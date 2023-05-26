@@ -13,7 +13,7 @@ void sky::set_image()
     init_texture();
     init_sprite();
     set_origin();
-    set_position(1920/2,1080/2);
+    init_position();
 }
 
 void sky::init_texture()
@@ -32,6 +32,11 @@ void sky::set_origin()
     float y = sky_sprite->getTexture()->getSize().y * sky_sprite->getScale().y;
 
     sky_sprite->setOrigin(x / 2, y / 2);
+}
+
+void sky::init_position()
+{
+    set_position(init_pos_x,init_pos_y);
 }
 
 void sky::set_position(float x, float y)

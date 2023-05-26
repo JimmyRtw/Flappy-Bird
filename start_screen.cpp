@@ -13,7 +13,7 @@ void start_screen::set_image()
     init_texture();
     init_sprite();
     set_origin();
-    set_position(1920/2,1080/2.7);
+    init_position();
 }
 
 void start_screen::init_texture()
@@ -39,8 +39,13 @@ void start_screen::set_position(float x, float y)
     start_screen_sprite->setPosition(x, y);
 }
 
-void start_screen::draw_sprite(RenderWindow* window,bool flag)
+void start_screen::init_position()
 {
-    if(!flag) window->draw(*start_screen_sprite);
+    set_position(init_pos_x,init_pos_y);
+}
+
+void start_screen::draw_sprite(RenderWindow* window)
+{
+    window->draw(*start_screen_sprite);
 }
 

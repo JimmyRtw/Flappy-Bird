@@ -9,6 +9,7 @@ using namespace sf;
 #include "pipe_manager.h"
 #include "start_screen.h"
 #include "bird.h"
+#include "button.h"
 
 #ifndef GAME_H
 #define GAME_H
@@ -26,9 +27,12 @@ class game
     start_screen start_screen_obj;
     bird bird_obj;
 
-    bool game_on = false;
-    bool game_start = true;
-    float object_speed = 2;
+    button button_restart;
+    button button_quit;
+
+    int game_on = 0;
+
+    float object_speed = 3;
 
     public:
 
@@ -41,7 +45,8 @@ class game
     void game_loop();
     void draw_objects();
     void update_window();
-    void update_game(bool);
+    void update_game(int);
+    void restart_game();
     void close_window();
 };
    

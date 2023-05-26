@@ -16,7 +16,12 @@ void bird::set_image()
     init_texture();
     init_sprite();
     set_origin();
-    set_position(1920/2,1080/2.11);
+    init_position();
+}
+
+void bird::init_position()
+{
+    set_position(init_pos_x,init_pos_y);
 }
 
 void bird::set_vertical_speed(float vertical_speed)
@@ -49,7 +54,7 @@ void bird::set_position(float x, float y)
     bird_sprite->setPosition(x, y);
 }
 
-bool bird::update_bird(Event* event)
+void bird::update_bird(Event* event,int* game_on)
 {
     this->vertical_speed += this->gravity;
 
@@ -61,12 +66,11 @@ bool bird::update_bird(Event* event)
     float pos = bird_sprite->getPosition().y + this->vertical_speed;
 
     set_position(1920/2,pos);
-    set_bird_life();
 
-    return this->alive;
+    set_bird_life(game_on);
 }
 
-void bird::set_bird_life()
+void bird::set_bird_life(int* game_on)
 {
     float pos_offset = (bird_sprite->getTexture()->getSize().y * bird_sprite->getScale().y)/2;
     float curr_pos = bird_sprite->getPosition().y;
@@ -74,6 +78,8 @@ void bird::set_bird_life()
     if((curr_pos+pos_offset)>=(1080-184) or (curr_pos-pos_offset)<=0)
     {
         this->alive = false;
+
+        *game_on = 2;
     }
 }
 

@@ -18,6 +18,9 @@ class bird
     float flap = -10;
     float gravity = 0.5;
 
+    float init_pos_x = 1920/2;
+    float init_pos_y = 1080/2.11;
+
     bool alive = true;
 
     string path = "C:\\GAME PROJECTS\\Flappy-Bird\\images\\";
@@ -30,12 +33,12 @@ class bird
     void set_vertical_speed(float);
     void init_sprite();
     void init_texture();
+    void init_position();
     void set_origin();
     void set_position(float,float);
-    void set_bird_life();
+    void set_bird_life(int*);
     void draw_sprite(RenderWindow*);
-
-    bool update_bird(Event*);
+    void update_bird(Event*,int*);
 };
    
 

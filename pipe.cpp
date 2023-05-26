@@ -14,7 +14,7 @@ void pipe::set_image(bool up)
     init_texture();
     init_sprite();
     set_origin();
-    set_position(1920/2,1000);
+    init_position();
 }
 
 void pipe::set_pipe_orientation(bool up)
@@ -74,6 +74,11 @@ void pipe :: reset_pipe_position(Sprite* side_img,Sprite* top_img,int hor_dist,i
     {
         this->pipe_sprite->setPosition(side_img_pos_x+hor_dist,side_img_pos_y);
     }
+}
+
+void pipe :: init_position()
+{
+    set_position(init_pos_x,init_pos_y);
 }
 
 Sprite* pipe :: return_pipe_sprite()

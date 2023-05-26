@@ -13,7 +13,7 @@ void ground::set_image()
     init_texture();
     init_sprite();
     set_origin();
-    set_position(0,1080);
+    init_position();
 }
 
 void ground::set_speed(float speed)
@@ -29,6 +29,11 @@ void ground::init_texture()
 void ground::init_sprite()
 {
     ground_sprite->setTexture(*ground_texture);
+}
+
+void ground::init_position()
+{
+    set_position(init_pos_x,init_pos_y);
 }
 
 void ground::set_origin()

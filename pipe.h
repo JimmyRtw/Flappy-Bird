@@ -16,6 +16,9 @@ class pipe
 
     bool pipe_up = false;
 
+    float init_pos_x = 1920/2;
+    float init_pos_y = 1000;
+
     string path = "C:\\GAME PROJECTS\\Flappy-Bird\\images\\";
 
     public:
@@ -25,6 +28,7 @@ class pipe
     void set_image(bool);
     void init_sprite();
     void init_texture();
+    void init_position();
     void set_origin();
     void set_pipe_orientation(bool);
     void set_position(float,float);

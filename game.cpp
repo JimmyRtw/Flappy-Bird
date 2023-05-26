@@ -1,6 +1,6 @@
 #include "game.h"
 
-game::game()
+game::game() : button_restart("Restart", 1920 / 2 , 1080 / 3 - 50),button_quit("Quit", 1920 / 2 , 1080 / 3 + 50)
 {
     init_window();
     init_game();
@@ -8,6 +8,17 @@ game::game()
 
 void game::play_game(Event *event)
 {
+    if (event->type == sf::Event::KeyPressed and !this->game_on)
+    {
+        this->game_on = 1;
+    }
+    else if (event->type == sf::Event::MouseButtonPressed and !this->game_on)
+    {
+        this->game_on = 1;
+    }
+
+    button_restart.set_events(event,&game_on);
+    button_quit.set_events(event,&game_on);
 }
 
 void game::init_window()
@@ -38,19 +49,12 @@ void game::quit_game(Event *event)
     {
         close_window();
     }
-    else if (event->type == sf::Event::KeyPressed)
-    {
-        this->game_on = true;
-    }
-    else if (event->type == sf::Event::MouseButtonPressed)
-    {
-        this->game_on = true;
-    }
 }
 
 void game::close_window()
 {
     this->window->close();
+    exit(0);
 }
 
 void game::update_window()
@@ -72,21 +76,56 @@ void game::game_loop()
     draw_objects();
 }
 
-void game::update_game(bool game_on)
+void game::update_game(int game_on)
 {
-    if(game_on)
+    if(this->game_on==1)
     {
-        this->game_on = bird_obj.update_bird(this->event);
+        bird_obj.update_bird(this->event,&this->game_on);
         ground_obj.move_ground(object_speed);
         pipe_manager_obj.move_pipes(object_speed);
     }
+    else if(this->game_on==3)
+    {
+        restart_game();
+    }
+}
+
+void game::restart_game()
+{
+    this->game_on = 0;
+
+    sky_obj.init_position();
+    pipe_manager_obj.init_pipes_position();
+    ground_obj.init_position();
+    bird_obj.init_position();
+    start_screen_obj.init_position();
 }
 
 void game::draw_objects()
 {
-    sky_obj.draw_sprite(this->window);
-    pipe_manager_obj.draw_pipes(this->window);
-    ground_obj.draw_sprite(this->window);
-    start_screen_obj.draw_sprite(this->window,this->game_on);
-    bird_obj.draw_sprite(this->window);
+    if(this->game_on==0)
+    {
+        sky_obj.draw_sprite(this->window);
+        pipe_manager_obj.draw_pipes(this->window);
+        ground_obj.draw_sprite(this->window);
+        bird_obj.draw_sprite(this->window);
+        start_screen_obj.draw_sprite(this->window);
+    }
+    else if(this->game_on==1)
+    {
+        sky_obj.draw_sprite(this->window);
+        pipe_manager_obj.draw_pipes(this->window);
+        ground_obj.draw_sprite(this->window);
+        bird_obj.draw_sprite(this->window);
+    }
+    else if(this->game_on==2)
+    {
+        sky_obj.draw_sprite(this->window);
+        pipe_manager_obj.draw_pipes(this->window);
+        ground_obj.draw_sprite(this->window);
+        bird_obj.draw_sprite(this->window);
+        button_restart.draw_button(this->window);
+        button_quit.draw_button(this->window);
+    }
+    
 }

@@ -16,6 +16,9 @@ class ground
 
     int speed;
 
+    float init_pos_x = 0;
+    float init_pos_y = 1080;
+
     string path = "C:\\GAME PROJECTS\\Flappy-Bird\\images\\";
 
     public:
@@ -26,6 +29,7 @@ class ground
     void set_speed(float);
     void init_sprite();
     void init_texture();
+    void init_position();
     void set_origin();
     void move_ground(float);
     void set_position(float,float);

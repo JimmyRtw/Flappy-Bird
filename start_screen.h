@@ -16,6 +16,9 @@ class start_screen
 
     int speed;
 
+    float init_pos_x = 1920/2;
+    float init_pos_y = 1080/2.7;
+
     string path = "C:\\GAME PROJECTS\\Flappy-Bird\\images\\";
 
     public:
@@ -27,7 +30,8 @@ class start_screen
     void init_texture();
     void set_origin();
     void set_position(float,float);
-    void draw_sprite(RenderWindow*,bool);
+    void init_position();
+    void draw_sprite(RenderWindow*);
 };
    
 
