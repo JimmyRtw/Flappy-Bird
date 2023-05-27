@@ -36,9 +36,12 @@ class bird
     void init_position();
     void set_origin();
     void set_position(float,float);
-    void set_bird_life(int*);
     void draw_sprite(RenderWindow*);
-    void update_bird(Event*,int*);
+    void update_bird(Event*,int*,vector<FloatRect>);
+
+    Sprite* get_bird();
+
+    bool is_collided(vector<FloatRect> vec,int *game_on);
 };
    
 

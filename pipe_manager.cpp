@@ -116,3 +116,15 @@ void pipe_manager :: pipe_reset_position()
     first_index = (first_index+1)%n;
 }
 
+vector<FloatRect> pipe_manager :: pipes_global_bounds()
+{
+    vector<FloatRect>vec;
+
+    for(int i=0;i<n;i++)
+    {
+        vec.push_back(up_pipes[i]->get_global_bounds());
+        vec.push_back(down_pipes[i]->get_global_bounds());
+    }
+
+    return vec;
+}

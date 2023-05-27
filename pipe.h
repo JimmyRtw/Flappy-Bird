@@ -36,8 +36,9 @@ class pipe
     void reset_pipe_position(Sprite*,Sprite*,int,int);
     void draw_sprite(RenderWindow*);
 
-
     Sprite* return_pipe_sprite();
+
+    FloatRect get_global_bounds();
 };
    
 

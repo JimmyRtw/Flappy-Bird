@@ -8,6 +8,12 @@ game::game() : button_restart("Restart", 1920 / 2 , 1080 / 3 - 50),button_quit("
 
 void game::play_game(Event *event)
 {
+    start_game(event);
+    check_button_events(event);
+}
+
+void game:: start_game(Event* event)
+{
     if (event->type == sf::Event::KeyPressed and !this->game_on)
     {
         this->game_on = 1;
@@ -16,7 +22,10 @@ void game::play_game(Event *event)
     {
         this->game_on = 1;
     }
+}
 
+void game:: check_button_events(Event* event)
+{
     button_restart.set_events(event,&game_on);
     button_quit.set_events(event,&game_on);
 }
@@ -80,7 +89,9 @@ void game::update_game(int game_on)
 {
     if(this->game_on==1)
     {
-        bird_obj.update_bird(this->event,&this->game_on);
+        vector<FloatRect> pipes_bounds = this->pipe_manager_obj.pipes_global_bounds();
+
+        bird_obj.update_bird(this->event,&this->game_on,pipes_bounds);
         ground_obj.move_ground(object_speed);
         pipe_manager_obj.move_pipes(object_speed);
     }

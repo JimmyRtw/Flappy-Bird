@@ -10,6 +10,7 @@ using namespace sf;
 #include "start_screen.h"
 #include "bird.h"
 #include "button.h"
+#include "bounds.h"
 
 #ifndef GAME_H
 #define GAME_H
@@ -42,6 +43,8 @@ class game
     void init_game();
     void quit_game(Event*);
     void play_game(Event*);
+    void start_game(Event*);
+    void check_button_events(Event*);
     void game_loop();
     void draw_objects();
     void update_window();

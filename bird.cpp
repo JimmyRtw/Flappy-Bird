@@ -54,8 +54,10 @@ void bird::set_position(float x, float y)
     bird_sprite->setPosition(x, y);
 }
 
-void bird::update_bird(Event* event,int* game_on)
+void bird::update_bird(Event* event,int* game_on,vector<FloatRect> vec)
 {
+    if(is_collided(vec,game_on)) return;
+
     this->vertical_speed += this->gravity;
 
     if(this->vertical_speed>=-10 and (event->type == Event::MouseButtonPressed or event->type == Event::KeyPressed))
@@ -66,12 +68,28 @@ void bird::update_bird(Event* event,int* game_on)
     float pos = bird_sprite->getPosition().y + this->vertical_speed;
 
     set_position(1920/2,pos);
-
-    set_bird_life(game_on);
 }
 
-void bird::set_bird_life(int* game_on)
+bool bird::is_collided(vector<FloatRect> vec,int *game_on)
 {
+    // check for the collision with the pipes
+
+    FloatRect bird_bounds = bird_sprite->getGlobalBounds();
+
+    for(FloatRect pipe_bounds:vec)
+    {
+        if(bird_bounds.intersects(pipe_bounds))
+        {
+            *game_on = 2;
+
+            this->alive = false;
+
+            return true;;
+        }
+    }
+
+    // check for the collision with the top and bottom of the screen
+
     float pos_offset = (bird_sprite->getTexture()->getSize().y * bird_sprite->getScale().y)/2;
     float curr_pos = bird_sprite->getPosition().y;
 
@@ -80,12 +98,19 @@ void bird::set_bird_life(int* game_on)
         this->alive = false;
 
         *game_on = 2;
+
+        return true;
     }
+
+    return false;
+}
+
+Sprite* bird :: get_bird()
+{
+    return this->bird_sprite;
 }
 
 void bird::draw_sprite(RenderWindow* window)
 {
     window->draw(*bird_sprite);
 }
-
-

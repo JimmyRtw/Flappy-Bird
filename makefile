@@ -1,10 +1,10 @@
 all: clean compile link run
 
 compile:
-	g++ -c main.cpp game.cpp sky.cpp ground.cpp pipe.cpp pipe_manager.cpp start_screen.cpp bird.cpp button.cpp -I"C:\SFML-2.5.1-windows-gcc-7.3.0-mingw-64-bit\SFML-2.5.1\include" -DSFML_STATIC
+	g++ -c main.cpp game.cpp sky.cpp ground.cpp pipe.cpp pipe_manager.cpp start_screen.cpp bird.cpp button.cpp bounds.cpp -I"C:\SFML-2.5.1-windows-gcc-7.3.0-mingw-64-bit\SFML-2.5.1\include" -DSFML_STATIC
 
 link:
-	g++ main.o game.o sky.o ground.o pipe.o pipe_manager.o start_screen.o bird.o button.o -o main -L"C:\SFML-2.5.1-windows-gcc-7.3.0-mingw-64-bit\SFML-2.5.1\lib" -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lopengl32 -lfreetype -lwinmm -lgdi32 -mwindows -lsfml-main
+	g++ main.o game.o sky.o ground.o pipe.o pipe_manager.o start_screen.o bird.o button.o bounds.o -o main -L"C:\SFML-2.5.1-windows-gcc-7.3.0-mingw-64-bit\SFML-2.5.1\lib" -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lopengl32 -lfreetype -lwinmm -lgdi32 -mwindows -lsfml-main
 
 run:
 	.\main

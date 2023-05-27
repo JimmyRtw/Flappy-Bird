@@ -86,3 +86,7 @@ Sprite* pipe :: return_pipe_sprite()
     return this->pipe_sprite;
 }
 
+FloatRect pipe :: get_global_bounds()
+{
+    return this->pipe_sprite->getGlobalBounds();
+}
