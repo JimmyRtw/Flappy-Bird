@@ -20,6 +20,7 @@ void pipe_manager :: set_indexes()
 {
     this->first_index = 0;
     this->last_index = n-1;
+    this->cross_index = 0;
 }
 
 void pipe_manager :: set_speed(float speed)
@@ -60,6 +61,10 @@ void pipe_manager :: draw_pipes(RenderWindow* window)
 
 void pipe_manager :: init_pipes_position()
 {
+    this->first_index = 0;
+    this->last_index = n-1;
+    this->cross_index = 0;
+
     float x = 1920/1.1;
     float y = 150 + (rand() % (int)(590 - 150 + 1));
 
@@ -114,6 +119,21 @@ void pipe_manager :: pipe_reset_position()
     
     last_index = first_index;
     first_index = (first_index+1)%n;
+}
+
+void pipe_manager :: set_game_score(int* game_score)
+{
+    pipe* cross_pipe = up_pipes[this->cross_index];
+
+    float x = cross_pipe->return_pipe_sprite()->getTexture()->getSize().x * cross_pipe->return_pipe_sprite()->getScale().x; 
+    float position = cross_pipe->return_pipe_sprite()->getPosition().x + x/2;
+
+    if(position<=(1920/2))
+    {
+        *game_score++;
+    }
+
+    this->cross_index = (this->cross_index+1)%n;
 }
 
 vector<FloatRect> pipe_manager :: pipes_global_bounds()

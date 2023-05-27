@@ -24,6 +24,7 @@ class pipe_manager
 
     int first_index;
     int last_index;
+    int cross_index;
 
     public:
 
@@ -34,6 +35,7 @@ class pipe_manager
     void set_speed(float);
     void set_ver_dist(int);
     void set_hor_dist(int);
+    void set_game_score(int *game_score);
     void init_pipes();
 
     void draw_pipes(RenderWindow* window);

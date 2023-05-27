@@ -89,11 +89,12 @@ void game::update_game(int game_on)
 {
     if(this->game_on==1)
     {
-        vector<FloatRect> pipes_bounds = this->pipe_manager_obj.pipes_global_bounds();
+        vector<FloatRect> pipes_bounds; // = this->pipe_manager_obj.pipes_global_bounds();
 
         bird_obj.update_bird(this->event,&this->game_on,pipes_bounds);
         ground_obj.move_ground(object_speed);
         pipe_manager_obj.move_pipes(object_speed);
+        pipe_manager_obj.set_game_score(&this->game_score);
     }
     else if(this->game_on==3)
     {
@@ -128,6 +129,7 @@ void game::draw_objects()
         pipe_manager_obj.draw_pipes(this->window);
         ground_obj.draw_sprite(this->window);
         bird_obj.draw_sprite(this->window);
+        score_obj.draw_score(this->game_score,this->window);
     }
     else if(this->game_on==2)
     {

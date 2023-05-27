@@ -11,6 +11,7 @@ using namespace sf;
 #include "bird.h"
 #include "button.h"
 #include "bounds.h"
+#include "score.h"
 
 #ifndef GAME_H
 #define GAME_H
@@ -27,11 +28,13 @@ class game
     pipe_manager pipe_manager_obj;
     start_screen start_screen_obj;
     bird bird_obj;
+    score score_obj;
 
     button button_restart;
     button button_quit;
 
     int game_on = 0;
+    int game_score = 123454564;
 
     float object_speed = 3;
 

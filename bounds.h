@@ -3,6 +3,9 @@
 using namespace sf;
 using namespace std;
 
+#ifndef BOUNDS_H
+#define BOUNDS_H
+
 class bounds
 {
     private:
@@ -20,3 +23,4 @@ class bounds
 
 };
 
+#endif 
