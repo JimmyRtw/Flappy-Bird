@@ -23,6 +23,9 @@ class bird
 
     bool alive = true;
 
+    int animation_delay = 5;
+    int animation_counter = 0;
+
     string path = "C:\\GAME PROJECTS\\Flappy-Bird\\images\\";
 
     public:
@@ -36,6 +39,7 @@ class bird
     void init_position();
     void set_origin();
     void set_position(float,float);
+    void animate_bird();
     void draw_sprite(RenderWindow*);
     void update_bird(Event*,int*,vector<FloatRect>);
 

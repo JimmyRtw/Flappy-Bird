@@ -1,9 +1,21 @@
 #include "game.h"
 
-game::game() : button_restart("Restart", 1920 / 2 , 1080 / 3 - 50),button_quit("Quit", 1920 / 2 , 1080 / 3 + 50)
+game::game() : button_restart("Restart", 1920 / 2 , 1080 / 3 - 50),
+               button_quit("Quit", 1920 / 2 , 1080 / 3 + 50),
+               st_score("hello",Vector2f(1920 / 2.f , 1080 / 3.f + 200),Color(70, 235, 52)),
+               st_high_score("hello",Vector2f(1920 / 2.f , 1080 / 3.f + 300),Color(235, 229, 52))
 {
+    init_variables();
     init_window();
     init_game();
+}
+
+
+void game :: init_variables()
+{
+    this->game_on = 0;
+    this->game_score = 0;
+    this->highest_score = local_storage_obj.read_file();
 }
 
 void game::play_game(Event *event)
@@ -85,16 +97,31 @@ void game::game_loop()
     draw_objects();
 }
 
+void game::set_high_score()
+{
+    if((this->game_score/5)>this->highest_score)
+    {
+        local_storage_obj.write_file(to_string(this->game_score/5));
+        this->highest_score = this->game_score/5;
+    }
+}
+
 void game::update_game(int game_on)
 {
     if(this->game_on==1)
     {
-        vector<FloatRect> pipes_bounds; // = this->pipe_manager_obj.pipes_global_bounds();
+        vector<FloatRect> pipes_bounds = this->pipe_manager_obj.pipes_global_bounds();
 
         bird_obj.update_bird(this->event,&this->game_on,pipes_bounds);
         ground_obj.move_ground(object_speed);
         pipe_manager_obj.move_pipes(object_speed);
         pipe_manager_obj.set_game_score(&this->game_score);
+    }
+    else if(this->game_on==2)
+    {
+        set_high_score();
+        st_high_score.set_text_string("Highest Score : " + to_string(this->highest_score));
+        st_score.set_text_string("Score : " + to_string(this->game_score/5));
     }
     else if(this->game_on==3)
     {
@@ -104,8 +131,7 @@ void game::update_game(int game_on)
 
 void game::restart_game()
 {
-    this->game_on = 0;
-
+    init_variables();
     sky_obj.init_position();
     pipe_manager_obj.init_pipes_position();
     ground_obj.init_position();
@@ -139,6 +165,8 @@ void game::draw_objects()
         bird_obj.draw_sprite(this->window);
         button_restart.draw_button(this->window);
         button_quit.draw_button(this->window);
+        st_score.draw_screen_text(this->window);
+        st_high_score.draw_screen_text(this->window);
     }
     
 }

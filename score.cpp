@@ -34,6 +34,7 @@ void score::init_sprite()
 
     for(int i=0;i<=9;i++)
     {
+        score_sprite[i]->setScale(1.5,1.5);
         score_sprite[i]->setTexture(*score_texture[i]);
     }
 }
@@ -57,81 +58,22 @@ void score::set_position(float x, float y,int index)
 
 void score::draw_score(int game_score,RenderWindow*window)
 {
-    string score = to_string(game_score);
-
-    Sprite new_image;
+    string score = to_string(game_score/5);
     
-    int odd = score.size()%2;
-    int offset = 25;
-    int num = 0;
+    float offset = 30*(score_sprite[0]->getScale().x-0.3f);
+    float spacing = 0;
+    int length = score.size();
 
-    if(odd)
+    float factor = length/2.f-0.5f;
+
+    factor = factor<0?0:factor;
+
+    for(char c:score)
     {
-        int mid_index = score.size()/2;
-
-        num = int(score[mid_index]-'0');
-        new_image = *score_sprite[num];
-        new_image.setPosition(1920/2,1080/6);
-
-        draw_sprite(window,&new_image);
-
-        for(int i=mid_index-1;i>=0;i--)
-        {
-            num = int(score[i]-'0');
-
-            new_image = *score_sprite[num];
-            new_image.setPosition(1920/2-offset,1080/6);
-            draw_sprite(window,&new_image);
-            offset += 25;
-        }
-
-        offset = 25;
-
-        for(int i=mid_index+1;i<score.size();i++)
-        {
-            num = int(score[i]-'0');
-
-            new_image = *score_sprite[num];
-            new_image.setPosition(1920/2+offset,1080/6);
-            draw_sprite(window,&new_image);
-            offset += 25;
-        }
-    }
-    else
-    {
-        int mid_index = score.size()/2;
-
-        num = int(score[mid_index]-'0');
-        new_image = *score_sprite[num];
-        new_image.setPosition(1920/2-offset,1080/6);
-
-        num = int(score[mid_index-1]-'0');
-        new_image = *score_sprite[num];
-        new_image.setPosition(1920/2+offset,1080/6);
-
-        offset = 50;
-
-        for(int i=mid_index-2;i>=0;i--)
-        {
-            num = int(score[i]-'0');
-
-            new_image = *score_sprite[num];
-            new_image.setPosition(1920/2-offset,1080/6);
-            draw_sprite(window,&new_image);
-            offset += 25;
-        }
-
-        offset = 50 ;
-
-        for(int i=mid_index+1;i<score.size();i++)
-        {
-            num = int(score[i]-'0');
-
-            new_image = *score_sprite[num];
-            new_image.setPosition(1920/2+offset,1080/6);
-            draw_sprite(window,&new_image);
-            offset += 25;
-        }
+        Sprite img_copy = *score_sprite[int(c-'0')];
+        img_copy.setPosition(1920/2-factor*offset + spacing,1080/6);
+        draw_sprite(window,&img_copy);
+        spacing+=offset;
     }
 }
 

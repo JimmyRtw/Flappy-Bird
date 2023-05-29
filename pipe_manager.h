@@ -24,7 +24,6 @@ class pipe_manager
 
     int first_index;
     int last_index;
-    int cross_index;
 
     public:
 

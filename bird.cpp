@@ -54,13 +54,33 @@ void bird::set_position(float x, float y)
     bird_sprite->setPosition(x, y);
 }
 
+void bird::animate_bird()
+{
+    animation_counter++;
+
+    if (animation_counter == animation_delay)
+    {
+        bird_sprite->setTexture(*bird_texture_2);
+    }
+    else if (animation_counter == (animation_delay * 2))
+    {
+        bird_sprite->setTexture(*bird_texture_3);
+    }
+    else if (animation_counter == (animation_delay * 3))
+    {
+        bird_sprite->setTexture(*bird_texture_1);
+        animation_counter = 0;
+    }  
+}
+
+
 void bird::update_bird(Event* event,int* game_on,vector<FloatRect> vec)
 {
     if(is_collided(vec,game_on)) return;
 
     this->vertical_speed += this->gravity;
 
-    if(this->vertical_speed>=-10 and (event->type == Event::MouseButtonPressed or event->type == Event::KeyPressed))
+    if(this->vertical_speed>=-10 and (event->type == Event::MouseButtonPressed or event->type == Event::KeyPressed or Keyboard::isKeyPressed(Keyboard::Key::Space) or Keyboard::isKeyPressed(Keyboard::Key::Up)))
     {
         this->vertical_speed = this->flap;
     }
@@ -68,6 +88,7 @@ void bird::update_bird(Event* event,int* game_on,vector<FloatRect> vec)
     float pos = bird_sprite->getPosition().y + this->vertical_speed;
 
     set_position(1920/2,pos);
+    animate_bird();
 }
 
 bool bird::is_collided(vector<FloatRect> vec,int *game_on)
